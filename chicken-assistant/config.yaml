@@ -65,4 +65,4 @@ schema:
       unit: str?
 
 # Pre-built image published by the build script / CI.
-image: ghcr.io/chickenassistant/chicken-assistant-addon-{arch}
+image: ghcr.io/chickenassistant/chicken-assistant-addon-{arch}:staging
