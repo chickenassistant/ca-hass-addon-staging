@@ -8,6 +8,8 @@
   available.
 - Records binary Home Assistant entity states such as `on`, `off`, `open`,
   `closed`, `wet`, and `dry` as `1`/`0` readings for automations.
+- Shows whether MQTT was discovered through Supervisor, manually configured,
+  or unavailable.
 - Adds translated add-on option labels and descriptions for the Home Assistant
   configuration UI.
 

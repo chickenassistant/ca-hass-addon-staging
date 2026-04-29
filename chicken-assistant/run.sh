@@ -44,6 +44,7 @@ MQTT_HOST=""
 MQTT_PORT=""
 MQTT_USERNAME=""
 MQTT_PASSWORD=""
+MQTT_SOURCE=""
 
 if [ -n "${SUPERVISOR_TOKEN:-}" ]; then
   resp="$(curl -sS --max-time 5 \
@@ -54,6 +55,7 @@ if [ -n "${SUPERVISOR_TOKEN:-}" ]; then
     MQTT_PORT="$(echo "$resp" | jq -r '.data.port // ""')"
     MQTT_USERNAME="$(echo "$resp" | jq -r '.data.username // ""')"
     MQTT_PASSWORD="$(echo "$resp" | jq -r '.data.password // ""')"
+    MQTT_SOURCE="supervisor"
     echo "addon: MQTT discovered via Supervisor (${MQTT_HOST}:${MQTT_PORT})"
   fi
 fi
@@ -64,17 +66,18 @@ override_port="$(opt mqtt_port '0')"
 override_user="$(opt mqtt_username '""')"
 override_pass="$(opt mqtt_password '""')"
 
-[ -n "$override_host" ]     && MQTT_HOST="$override_host"
-[ "$override_port" != "0" ] && MQTT_PORT="$override_port"
-[ -n "$override_user" ]     && MQTT_USERNAME="$override_user"
-[ -n "$override_pass" ]     && MQTT_PASSWORD="$override_pass"
+if [ -n "$override_host" ]; then MQTT_HOST="$override_host"; MQTT_SOURCE="manual"; fi
+if [ "$override_port" != "0" ]; then MQTT_PORT="$override_port"; MQTT_SOURCE="manual"; fi
+if [ -n "$override_user" ]; then MQTT_USERNAME="$override_user"; MQTT_SOURCE="manual"; fi
+if [ -n "$override_pass" ]; then MQTT_PASSWORD="$override_pass"; MQTT_SOURCE="manual"; fi
 
 if [ -z "$MQTT_HOST" ]; then
+  MQTT_SOURCE="none"
   echo "addon: no MQTT broker found — Z2M device discovery disabled. Install Mosquitto or set mqtt_host to enable." >&2
 fi
 : "${MQTT_PORT:=1883}"
 
-export MQTT_HOST MQTT_PORT MQTT_USERNAME MQTT_PASSWORD
+export MQTT_HOST MQTT_PORT MQTT_USERNAME MQTT_PASSWORD MQTT_SOURCE
 
 # ── Home Assistant native ingestion (for ZHA etc.) ───────────────────────
 # Empty ha_entities skips the poller entirely; homeassistant_api: true in
