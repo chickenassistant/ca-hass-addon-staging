@@ -16,6 +16,7 @@ opt() {
 # ── Core options ──────────────────────────────────────────────────────────
 export ADMIN_USERNAME="$(opt admin_username '"admin"')"
 export ADMIN_PASSWORD="$(opt admin_password '""')"
+export APP_MODE=home_assistant_addon
 
 # HA persists add-on state under /data.
 export DATA_DIR=/data
