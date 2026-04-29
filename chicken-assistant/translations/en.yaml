@@ -1,0 +1,43 @@
+configuration:
+  session_secret:
+    name: Session secret
+    description: Optional advanced setting. Leave blank to let Chicken Assistant generate and reuse a secure session secret.
+  admin_username:
+    name: Bootstrap admin username
+    description: Username used only when admin_password is set and the database does not already have users.
+  admin_password:
+    name: Bootstrap admin password
+    description: Optional bootstrap password. Leave blank to create the first admin account from the web UI.
+  mqtt_host:
+    name: MQTT host override
+    description: Leave blank to use the MQTT service discovered by Home Assistant Supervisor, such as the Mosquitto add-on.
+  mqtt_port:
+    name: MQTT port override
+    description: Leave 0 to use the Supervisor-discovered MQTT port.
+  mqtt_username:
+    name: MQTT username override
+    description: Optional username for an external MQTT broker.
+  mqtt_password:
+    name: MQTT password override
+    description: Optional password for an external MQTT broker.
+  ha_poll_interval:
+    name: Home Assistant poll interval
+    description: How often Chicken Assistant reads mapped Home Assistant entities, in seconds.
+  ha_entities:
+    name: Home Assistant entity mappings
+    description: Optional startup mappings for ZHA, template sensors, or other Home Assistant entities.
+    fields:
+      entity_id:
+        name: Entity ID
+        description: Home Assistant entity to read, such as sensor.coop_temperature or binary_sensor.coop_door.
+      device_id:
+        name: Chicken Assistant device ID
+        description: Device identifier used inside Chicken Assistant dashboards and automations.
+      sensor_type:
+        name: Sensor type
+        description: Reading type, such as temperature, humidity, door_state, motion, water_level, or battery.
+      unit:
+        name: Unit
+        description: Optional unit override. Leave blank to use the entity unit from Home Assistant.
+network:
+  8080/TCP: Direct web UI port. Ingress users usually do not need to expose this port.
