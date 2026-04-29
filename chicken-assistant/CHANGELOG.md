@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.2
 
 - Detects Home Assistant add-on mode so onboarding, integrations, remote
   access, and system status copy use Home Assistant-native guidance.
@@ -12,6 +12,8 @@
   or unavailable.
 - Adds translated add-on option labels and descriptions for the Home Assistant
   configuration UI.
+- Updates the add-on README for onboarding, ZHA, MQTT, remote access, and
+  direct-port caveats.
 
 ## 0.1.1
 

@@ -1,5 +1,5 @@
 name: Chicken Assistant (Staging)
-version: "0.1.1"
+version: "0.1.2"
 slug: chicken_assistant_staging
 description: Local-first chicken coop monitoring and automation
 url: https://github.com/chickenassistant/core
@@ -30,7 +30,7 @@ panel_title: Chickens
 services:
   - mqtt:want
 
-# Grants read access to HA state (for future Zigbee/ZHA integration).
+# Grants read access to HA state for ZHA/native entity ingestion.
 homeassistant_api: true
 
 # User-facing options. SESSION_SECRET is auto-generated on first run when
