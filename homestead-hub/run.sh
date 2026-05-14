@@ -20,7 +20,7 @@ export APP_MODE=home_assistant_addon
 
 # HA persists add-on state under /data.
 export DATA_DIR=/data
-export DATABASE_PATH=/data/chickenassistant.db
+export DATABASE_PATH=/data/homestead-hub.db
 
 if [ ! -s "$DATABASE_PATH" ] && [ -z "$ADMIN_PASSWORD" ]; then
   echo "addon: no admin_password set; first-run setup will create the initial admin account in the web UI." >&2
@@ -78,6 +78,16 @@ fi
 : "${MQTT_PORT:=1883}"
 
 export MQTT_HOST MQTT_PORT MQTT_USERNAME MQTT_PASSWORD MQTT_SOURCE
+
+# ── Module toggles ───────────────────────────────────────────────────────
+export CA_ENABLED="$(opt ca_enabled 'true')"
+export GA_ENABLED="$(opt ga_enabled 'true')"
+
+# ── Weather (GA module) ───────────────────────────────────────────────────
+export WEATHER_SOURCE="$(opt weather_source '"open_meteo"')"
+export WEATHER_LAT="$(opt weather_lat '0')"
+export WEATHER_LON="$(opt weather_lon '0')"
+export WEATHER_STATION_URL="$(opt weather_station_url '""')"
 
 # ── Home Assistant native ingestion (for ZHA etc.) ───────────────────────
 # Empty ha_entities skips the poller entirely; homeassistant_api: true in

@@ -1,0 +1,10 @@
+# Supervisor addon builder picks BUILD_FROM per architecture. We track the
+# core image tag here; scripts/build-addon.sh rewrites it during release.
+build_from:
+  amd64: ghcr.io/homestead-assistant/hub:latest
+  aarch64: ghcr.io/homestead-assistant/hub:latest
+
+labels:
+  org.opencontainers.image.title: Homestead Hub
+  org.opencontainers.image.source: https://github.com/homestead-assistant/hub
+  org.opencontainers.image.licenses: MIT

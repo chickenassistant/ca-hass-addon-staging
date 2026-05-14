@@ -1,8 +1,8 @@
-name: Chicken Assistant (Staging)
-version: "0.1.2"
-slug: chicken_assistant_staging
-description: Local-first chicken coop monitoring and automation
-url: https://github.com/chickenassistant/core
+name: Homestead Hub (Staging)
+version: "0.2.0"
+slug: homestead_hub_staging
+description: Local-first home automation hub for chicken keeping and garden management
+url: https://github.com/homestead-assistant/hub
 arch:
   - amd64
   - aarch64
@@ -19,8 +19,8 @@ ports_description:
 ingress: true
 ingress_port: 8080
 
-panel_icon: mdi:egg
-panel_title: Chickens
+panel_icon: mdi:home-automation
+panel_title: Homestead
 
 # Soft-require MQTT: install works without a broker (ZHA-only users). Z2M
 # device discovery is disabled when no broker is available.
@@ -44,8 +44,16 @@ options:
   mqtt_port: 0
   mqtt_username: ""
   mqtt_password: ""
+  # Module toggles. Disable a module to hide its nav and routes.
+  ca_enabled: true
+  ga_enabled: true
+  # Weather (GA module). Set lat/lon for Open-Meteo, or set station_url for WeeWX.
+  weather_source: open_meteo
+  weather_lat: 0.0
+  weather_lon: 0.0
+  weather_station_url: ""
   # Home Assistant native ingestion (ZHA, etc.). Leave empty to skip.
-  # Each entry maps an HA entity to a Chicken Assistant sensor reading.
+  # Each entry maps an HA entity to a Homestead Hub sensor reading.
   ha_poll_interval: 30
   ha_entities: []
 
@@ -57,6 +65,12 @@ schema:
   mqtt_port: int
   mqtt_username: str
   mqtt_password: password
+  ca_enabled: bool
+  ga_enabled: bool
+  weather_source: str
+  weather_lat: float
+  weather_lon: float
+  weather_station_url: str
   ha_poll_interval: int(5,3600)
   ha_entities:
     - entity_id: str
@@ -65,4 +79,4 @@ schema:
       unit: str?
 
 # Pre-built image published by the build script / CI.
-image: ghcr.io/chickenassistant/chicken-assistant-addon-{arch}:staging
+image: ghcr.io/homestead-assistant/hub-addon-{arch}:staging

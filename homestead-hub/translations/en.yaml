@@ -1,7 +1,7 @@
 configuration:
   session_secret:
     name: Session secret
-    description: Optional advanced setting. Leave blank to let Chicken Assistant generate and reuse a secure session secret.
+    description: Optional advanced setting. Leave blank to let Homestead Hub generate and reuse a secure session secret.
   admin_username:
     name: Bootstrap admin username
     description: Username used only when admin_password is set and the database does not already have users.
@@ -20,9 +20,27 @@ configuration:
   mqtt_password:
     name: MQTT password override
     description: Optional password for an external MQTT broker.
+  ca_enabled:
+    name: Chicken Assistant module
+    description: Enable the Chicken Assistant module (flock management, egg logging, coop monitoring).
+  ga_enabled:
+    name: Garden Assistant module
+    description: Enable the Garden Assistant module (grow zones, propagation, mother plants, weather, inventory sync).
+  weather_source:
+    name: Weather source
+    description: "Weather data provider. Options: open_meteo (free, no key) or weeewx (local weather station)."
+  weather_lat:
+    name: Latitude
+    description: Location latitude for Open-Meteo weather. Leave 0 to disable weather fetching.
+  weather_lon:
+    name: Longitude
+    description: Location longitude for Open-Meteo weather.
+  weather_station_url:
+    name: WeeWX station URL
+    description: Base URL of your local WeeWX station (e.g. http://192.168.1.50). Used when weather_source is weeewx.
   ha_poll_interval:
     name: Home Assistant poll interval
-    description: How often Chicken Assistant reads mapped Home Assistant entities, in seconds.
+    description: How often Homestead Hub reads mapped Home Assistant entities, in seconds.
   ha_entities:
     name: Home Assistant entity mappings
     description: Optional startup mappings for ZHA, template sensors, or other Home Assistant entities.
@@ -31,8 +49,8 @@ configuration:
         name: Entity ID
         description: Home Assistant entity to read, such as sensor.coop_temperature or binary_sensor.coop_door.
       device_id:
-        name: Chicken Assistant device ID
-        description: Device identifier used inside Chicken Assistant dashboards and automations.
+        name: Device identifier
+        description: Device identifier used inside Homestead Hub dashboards and automations.
       sensor_type:
         name: Sensor type
         description: Reading type, such as temperature, humidity, door_state, motion, water_level, or battery.
