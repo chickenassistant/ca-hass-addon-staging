@@ -5,7 +5,6 @@ description: Local-first home automation hub for chicken keeping and garden mana
 url: https://github.com/homestead-assistant/hub
 arch:
   - amd64
-  - aarch64
 startup: application
 boot: auto
 init: false
