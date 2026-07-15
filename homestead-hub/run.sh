@@ -81,6 +81,7 @@ export MQTT_HOST MQTT_PORT MQTT_USERNAME MQTT_PASSWORD MQTT_SOURCE
 
 # ── Module toggles ───────────────────────────────────────────────────────
 export CA_ENABLED="$(opt ca_enabled 'true')"
+export CA_VISION_ENABLED="$(opt ca_vision_enabled 'true')"
 export GA_ENABLED="$(opt ga_enabled 'true')"
 
 # ── Weather (GA module) ───────────────────────────────────────────────────
